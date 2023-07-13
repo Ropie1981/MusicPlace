@@ -1,7 +1,10 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -9,10 +12,10 @@ import { CardActionArea } from "@mui/material";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
 import keyboard from "../assets/keyboard.jpg";
 
-export default function AdCard() {
+export default function AdCard({ ad }) {
   const navigate = useNavigate();
   const handleLinkDetail = () => {
-    navigate("/detail-annonce");
+    navigate(`/annonces/${ad.id}`);
   };
 
   return (
@@ -25,16 +28,35 @@ export default function AdCard() {
           alt="ad picture"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Titre de l'Annonce
-          </Typography>
+          <Grid container spacing={1}>
+            <Grid item xs={8}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                color="primary"
+              >
+                {ad.title}
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                elevation={5}
+              >
+                <Typography variant="h6" color="primary">
+                  Prix:{ad.price}€
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
           <Typography variant="body2" color="text.secondary">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi
-            doloribus perferendis dolor saepe voluptatem laborum omnis
-            laboriosam, dolorem nisi in debitis nostrum corporis eligendi.
-            Minima nobis magni ex illum. Incidunt nemo tenetur, quae amet fugiat
-            quia unde impedit eligendi consequuntur corporis ea veritatis.
-            Facere, quidem aspernatur exercitationem quia quisquam sapiente.
+            {ad.description}
           </Typography>
           <Box sx={{ pt: 1, display: "flex", justifyContent: "center" }}>
             <AdsClickIcon />
@@ -44,3 +66,12 @@ export default function AdCard() {
     </Card>
   );
 }
+
+AdCard.propTypes = {
+  ad: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+};

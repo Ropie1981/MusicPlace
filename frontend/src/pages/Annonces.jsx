@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -7,7 +8,22 @@ import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
 
 function Annonces() {
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const [ads, setAds] = useState([]);
+
+  const getAds = () => {
+    axios
+      .get(`${BACKEND_URL}/ads`)
+      .then((response) => {
+        setAds(response.data);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
+  useEffect(getAds, []);
+
   return (
     <>
       <Navbar />
@@ -38,7 +54,6 @@ function Annonces() {
         </Typography>
         <Categories />
         <Container maxWidth="xxl" sx={{ py: 8 }}>
-          {/* End hero unit */}
           <Grid
             container
             spacing={4}
@@ -49,17 +64,17 @@ function Annonces() {
               justifyContent: { md: "center", lg: "center" },
             }}
           >
-            {cards.map((card) => (
+            {ads.map((ad) => (
               <Grid
                 item
-                key={card}
+                key={ad.id}
                 xs={12}
                 sm={6}
                 md={6}
                 lg={4}
                 justifyContent="center"
               >
-                <AdCard />
+                <AdCard ad={ad} />
               </Grid>
             ))}
           </Grid>

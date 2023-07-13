@@ -32,7 +32,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/annonces" element={<Annonces />} />
-          <Route path="/detail-annonce" element={<DetailAnnonce />} />
+          <Route path="/annonces/:id" element={<DetailAnnonce />} />
         </Routes>
       </ThemeProvider>
     </div>
