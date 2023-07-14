@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -139,11 +138,3 @@ export default function DetailAnnonce() {
     </Container>
   );
 }
-
-DetailAnnonce.propTypes = {
-  ad: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-};

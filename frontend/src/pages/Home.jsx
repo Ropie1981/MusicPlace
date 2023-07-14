@@ -7,12 +7,21 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 import MusicGear from "../assets/musicGear.jpg";
+import { useUserContext } from "../Contexts/userContext";
 
 export default function Home() {
+  const { user } = useUserContext();
   const navigate = useNavigate();
   const handleLinkAds = () => {
     navigate("/annonces");
   };
+  const handleLinkRegister = () => {
+    navigate("/register");
+  };
+  const handleLinkPublish = () => {
+    navigate("/publish");
+  };
+
   return (
     <Container
       maxWidth="xxl"
@@ -66,14 +75,30 @@ export default function Home() {
       >
         <Stack
           sx={{ pt: 4 }}
-          direction="row"
+          direction={{ md: "row" }}
           spacing={2}
           justifyContent="center"
         >
           <Button variant="contained" onClick={handleLinkAds}>
             Voir toutes les Annonces
           </Button>
-          <Button variant="outlined">Créer un Compte</Button>
+          {!user.id ? (
+            <Button
+              variant="outlined"
+              onClick={handleLinkRegister}
+              sx={{ mt: { xs: "2" } }}
+            >
+              Créer un Compte
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              sx={{ mt: { xs: 2 } }}
+              onClick={handleLinkPublish}
+            >
+              Publier une Annonce
+            </Button>
+          )}
         </Stack>
       </Box>
     </Container>

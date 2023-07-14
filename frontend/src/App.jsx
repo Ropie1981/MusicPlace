@@ -6,6 +6,9 @@ import Home from "./pages/Home";
 import Annonces from "./pages/Annonces";
 import DetailAnnonce from "./pages/DetailAnnonce";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import UserProfile from "./pages/UserProfile";
+import PublishAd from "./pages/PublishAd";
 import Navbar from "./components/Navbar";
 import "./App.css";
 
@@ -40,6 +43,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/publish" element={<PublishAd />} />
+
           <Route path="/annonces" element={<Annonces />} />
           <Route path="/annonces/:id" element={<DetailAnnonce />} />
         </Routes>
