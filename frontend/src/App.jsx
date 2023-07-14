@@ -46,7 +46,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/publish" element={<PublishAd />} />
-
           <Route path="/annonces" element={<Annonces />} />
           <Route path="/annonces/:id" element={<DetailAnnonce />} />
         </Routes>
