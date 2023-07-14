@@ -1,10 +1,27 @@
 const models = require("../models");
 
+const profile = (req, res) => {
+  const id = req.payloads.sub;
+  models.user
+    .find(id)
+    .then(([users]) => {
+      if (users[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(users[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const browse = (req, res) => {
   models.user
     .findAll()
-    .then(([rows]) => {
-      res.send(rows);
+    .then(([articles]) => {
+      res.send(articles);
     })
     .catch((err) => {
       console.error(err);
@@ -15,11 +32,11 @@ const browse = (req, res) => {
 const read = (req, res) => {
   models.user
     .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
+    .then(([users]) => {
+      if (users[0] == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(users[0]);
       }
     })
     .catch((err) => {
@@ -83,6 +100,7 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
+  profile,
   browse,
   read,
   edit,

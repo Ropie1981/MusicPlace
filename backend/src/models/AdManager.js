@@ -31,7 +31,7 @@ class AdManager extends AbstractManager {
         picture,
         title,
         price,
-        description,) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        description) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         ad.user_id,
         ad.instrument_id,

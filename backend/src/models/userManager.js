@@ -5,13 +5,20 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
+  findByEmailWithPassword(email) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE email = ?`, [
+      email,
+    ]);
+  }
+
   insert(user) {
     return this.database.query(
-      `insert into ${this.table} (firstname, lastname, password, bio, city, phone, profile_picture, registration_date, admin) values (?, ?, ? , ?, ?, ?, ? , ?, ?)`,
+      `insert into ${this.table} (firstname, lastname, email, hashedPassword, bio, city, phone, profile_picture, registration_date, admin) values (?, ?, ?, ? , ?, ?, ?, ? , ?, ?)`,
       [
         user.firstname,
         user.lastname,
-        user.password,
+        user.email,
+        user.hashedPassword,
         user.bio,
         user.city,
         user.phone,
@@ -24,11 +31,11 @@ class UserManager extends AbstractManager {
 
   update(user) {
     return this.database.query(
-      `update ${this.table} set firstname, lastname, password, bio, city, phone, profile_picture, registration_date, admin = ? where id = ?`,
+      `update ${this.table} set firstname, lastname, email, bio, city, phone, profile_picture, registration_date, admin = ? where id = ?`,
       [
         user.firstname,
         user.lastname,
-        user.password,
+        user.email,
         user.bio,
         user.city,
         user.phone,
