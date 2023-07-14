@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -11,66 +11,109 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 import MusicPlaceSq from "../assets/MusicPlaceSq.png";
+import { useUserContext } from "../Contexts/userContext";
+import APIService from "../services/APIService";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        DevPaf
       </Link>{" "}
       {new Date().getFullYear()}
-      "."
     </Typography>
   );
 }
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Login() {
+  const { login } = useUserContext();
+  const [msg, setMsg] = useState("");
+  const [userInfos, setUserInfos] = useState({
+    email: "",
+    password: "",
+  });
+  const notifyLogin = () => toast.success(`Connexion Réussie !`);
+
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.warn({
-      email: data.get("email"),
-      password: data.get("password"),
+  const validateForm = () => {
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm) {
+      APIService.post(`${BACKEND_URL}/login`, userInfos)
+        .then(({ data: user }) => {
+          login(user);
+          notifyLogin();
+          navigate("/");
+        })
+        .catch((error) => {
+          if (error.response?.status === 401) setMsg("Wrong credentials");
+          else setMsg("Try again later.");
+        });
+    } else {
+      setMsg("Unvalid form");
+    }
+  };
+
+  const handleChange = (e) => {
+    setUserInfos({
+      ...userInfos,
+      [e.target.name]: e.target.value,
     });
-    navigate("/");
   };
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
         item
-        xs={12}
-        md={12}
-        lg={6}
+        xs={false}
+        sm={false}
+        md={7}
         sx={{
-          height: { xs: "20%", lg: "100%" },
           backgroundImage: `url(${MusicPlaceSq})`,
           backgroundRepeat: "no-repeat",
-          backgroundColor: "black",
-          backgroundSize: "contain",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
+          backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
-      <Grid item xs={12} md={12} lg={6} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
-            my: 8,
-            mx: 4,
+            my: 6,
+            mx: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
+          <Box sx={{ borderRadius: 2, overflow: "hidden", display: "flex" }}>
+            <img src={MusicPlaceL} alt="logo" width="200px" />
+          </Box>
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Login
           </Typography>
+          {msg && (
+            <Typography variant="body2" color="error">
+              {msg}
+            </Typography>
+          )}
           <Box
             component="form"
             noValidate
@@ -82,20 +125,22 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Adresse Email"
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Mot de Passe"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -107,21 +152,21 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/" variant="body2">
-                  Forgot password?
+                <Link href="/register" variant="body2">
+                  Mot de Passe Oublié?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
-                  "Don't have an account? Sign Up"
+                  "Nouveau chez nous? Créer un compte"
                 </Link>
               </Grid>
             </Grid>
-            <Copyright />
+            <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
       </Grid>
