@@ -99,7 +99,7 @@ export default function UserInfos({ user }) {
               sx={{ ml: 1 }}
               gutterBottom
             >
-              {user.city}
+              {user.city.charAt(0).toUpperCase() + user.city.slice(1)}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "flex-start" }}>
