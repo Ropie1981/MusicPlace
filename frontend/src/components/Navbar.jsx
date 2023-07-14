@@ -1,4 +1,7 @@
 import * as React from "react";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,9 +12,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { useNavigate } from "react-router-dom";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-export default function BottomAppBar() {
+export default function Navbar({ toggleColorMode }) {
+  const theme = useTheme();
   const navigate = useNavigate();
   const [anchorElNavMenu, setAnchorElNavMenu] = React.useState(null);
   const handleOpenNavMenu = (event) => {
@@ -80,13 +85,29 @@ export default function BottomAppBar() {
         </Menu>
 
         <Box sx={{ flexGrow: 1 }} />
-        <IconButton color="primary">
+        <IconButton
+          size="large"
+          aria-label="colorMode"
+          onClick={toggleColorMode}
+          color="primary"
+        >
+          {theme.palette.mode === "light" ? (
+            <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
+          )}
+        </IconButton>
+        <IconButton color="primary" disabled>
           <SearchIcon />
         </IconButton>
-        <IconButton color="primary">
+        <IconButton color="primary" disabled>
           <MoreIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
   );
 }
+
+Navbar.propTypes = {
+  toggleColorMode: PropTypes.func.isRequired,
+};
