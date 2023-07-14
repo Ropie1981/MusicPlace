@@ -1,16 +1,13 @@
 import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
@@ -22,9 +19,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <NavLink color="inherit" href="https://mui.com/">
         DevPaf
-      </Link>{" "}
+      </NavLink>{" "}
       {new Date().getFullYear()}
     </Typography>
   );
@@ -142,10 +139,7 @@ export default function Login() {
               autoComplete="current-password"
               onChange={handleChange}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -154,18 +148,7 @@ export default function Login() {
             >
               Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/register" variant="body2">
-                  Mot de Passe Oublié?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  "Nouveau chez nous? Créer un compte"
-                </Link>
-              </Grid>
-            </Grid>
+
             <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>

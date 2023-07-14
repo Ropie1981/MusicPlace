@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import APIService from "../services/APIService";
+import DragDropFile from "../components/DragDropFile/DragDropFile";
 import { useUserContext } from "../Contexts/userContext";
 
 export default function PublishAd() {
@@ -70,7 +71,11 @@ export default function PublishAd() {
       component="main"
       maxWidth="lg"
       sx={{
-        pb: "3rem",
+        height: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Box
@@ -81,7 +86,7 @@ export default function PublishAd() {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" color="primary">
           Publier une nouvelle annonce
         </Typography>
         <Box
@@ -138,6 +143,7 @@ export default function PublishAd() {
           </Button>
         </Box>
       </Box>
+      <DragDropFile />
     </Container>
   );
 }
