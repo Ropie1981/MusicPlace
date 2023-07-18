@@ -31,7 +31,15 @@ const verifyPassword = (req, res) => {
       if (isVerified) {
         // on créé un token, encodé avec le mot de passe contenu dans le fichier d'environnement
         const token = jwt.sign(
-          { sub: req.user.id, role: req.user.role || "USER" },
+          {
+            sub: req.user.id,
+            email: req.user.email,
+            phone: req.user.phone,
+            city: req.user.city,
+            profile_picture: req.user.profile_picture,
+            admin: req.user.admin,
+            role: "USER",
+          },
           JWT_SECRET,
           {
             algorithm: "HS512",

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
@@ -10,8 +9,11 @@ import Backdrop from "@mui/material/Backdrop";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
+import DragDropFiles from "./DragDropFile/DragDropFile";
+import { useUserContext } from "../Contexts/userContext";
 
-export default function UserInfos({ user }) {
+export default function UserInfos() {
+  const { user } = useUserContext();
   const [openPhoto, setOpenPhoto] = React.useState(false);
 
   const handlePhotoClose = () => {
@@ -21,16 +23,25 @@ export default function UserInfos({ user }) {
     setOpenPhoto(true);
   };
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+  const imagePath = `${BACKEND_URL}/picture/${user.profil_picture}`;
+
   return (
     <Card sx={{ maxWidth: "100%", mb: { xs: 3, md: 3 } }}>
       <Box
         sx={{
           p: 2,
           display: "flex",
-          flexDirection: "column",
-          alignContent: "center",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
+        <Typography gutterBottom variant="h4" component="div" sx={{ ml: 2 }}>
+          {user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}{" "}
+          {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
+        </Typography>
         <Box
           sx={{
             m: 2,
@@ -41,13 +52,13 @@ export default function UserInfos({ user }) {
         >
           <Avatar
             alt="user Picture"
-            src={user.profile_picture}
-            sx={{ width: 150, height: 150 }}
+            src={imagePath}
+            sx={{ width: 100, height: 100 }}
           />
           <Button
             variant="text"
             color="primary"
-            sx={{ fontSize: 9, fontWeight: 400, m: 1 }}
+            sx={{ fontSize: 9, fontWeight: 400, m: 1, color: "#FDCA40" }}
             onClick={handlePhotoOpen}
           >
             changer ma photo
@@ -67,25 +78,14 @@ export default function UserInfos({ user }) {
                 justifyContent: "center",
               }}
             >
-              upload photo
-              <Button
-                size="small"
-                variant="contained"
-                onClick={handlePhotoClose}
-                sx={{ m: 2 }}
-              >
-                Fermer
-              </Button>
+              <DragDropFiles handlePhotoClose={handlePhotoClose} />
             </Box>
           </Backdrop>
         </Box>
-        <Typography gutterBottom variant="h4" component="div">
-          {user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}{" "}
-          {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
-        </Typography>
+
         <CardContent
           sx={{
-            mx: 2,
+            mr: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
@@ -129,25 +129,3 @@ export default function UserInfos({ user }) {
     </Card>
   );
 }
-
-UserInfos.propTypes = {
-  user: PropTypes.shape({
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    phone: PropTypes.string,
-    email: PropTypes.string,
-    city: PropTypes.string,
-    profile_picture: PropTypes.string,
-    cv: PropTypes.string,
-  }),
-};
-
-UserInfos.defaultProps = {
-  user: {
-    firstname: "prénom candidat",
-    lastname: "nom candidat",
-    email: "candidat@mail.com",
-    city: "Paris",
-    profile_picture: "https://xsgames.co/randomusers/avatar.php?g=female",
-  },
-};

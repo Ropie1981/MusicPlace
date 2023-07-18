@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -9,14 +10,18 @@ import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import APIService from "../services/APIService";
-import DragDropFile from "../components/DragDropFile/DragDropFile";
 import { useUserContext } from "../Contexts/userContext";
 
 export default function PublishAd() {
+  const navigate = useNavigate();
   const { user } = useUserContext();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-  const notifyCreation = () => toast.success("Nouvelle Annonce Publiée!");
+  const notifyCreation = () =>
+    toast.success(`Nouvelle Annonce de Publiée au nom de ${
+      user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)
+    } 
+  ${user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}`);
   const notifyCreationError = () =>
     toast.error("Problème lors de la publication");
   const date = new Date();
@@ -65,6 +70,12 @@ export default function PublishAd() {
         notifyCreationError();
       });
   };
+
+  useEffect(() => {
+    if (!user?.id) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Container
@@ -143,7 +154,6 @@ export default function PublishAd() {
           </Button>
         </Box>
       </Box>
-      <DragDropFile />
     </Container>
   );
 }

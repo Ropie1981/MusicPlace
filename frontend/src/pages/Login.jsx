@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <NavLink color="inherit" href="https://mui.com/">
-        DevPaf
+        Pierre Saumont
       </NavLink>{" "}
       {new Date().getFullYear()}
     </Typography>
@@ -36,7 +36,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const notifyLogin = () => toast.success(`Connexion Réussie !`);
+  const notifyLogin = () => toast.success(`Connexion Réussie!`);
 
   const navigate = useNavigate();
 

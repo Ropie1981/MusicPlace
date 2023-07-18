@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AdCard from "../components/AdCard";
@@ -32,18 +32,6 @@ function Annonces() {
         marginTop: { lg: 6.2 },
       }}
     >
-      <Typography
-        component="h1"
-        variant="h2"
-        align="center"
-        color="primary"
-        gutterBottom
-      >
-        Annonces
-      </Typography>
-      <Typography variant="h5" align="center" color="text.secondary" paragraph>
-        Trouve ton matos !
-      </Typography>
       <Categories />
       <Container maxWidth="xxl" sx={{ py: 8 }}>
         <Grid

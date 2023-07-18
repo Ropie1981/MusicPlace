@@ -8,7 +8,8 @@ const adControllers = require("../controllers/adControllers");
 
 adRouter.get("/ads", adControllers.browse);
 adRouter.get("/ads/:id", adControllers.read);
-adRouter.put("/ads/:id", adControllers.edit);
+adRouter.get("/user-ads/:id", adControllers.browseByUserId);
+adRouter.put("/ads/:id", verifyToken, adControllers.edit);
 adRouter.post("/ads", verifyToken, adControllers.add);
 adRouter.delete("/ads/:id", adControllers.destroy);
 

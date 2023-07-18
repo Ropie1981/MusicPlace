@@ -23,10 +23,12 @@ function App() {
     palette: {
       mode,
       primary: {
-        main: "#DACC3E",
+        main: "#33A1FD",
+        darker: "#2176FF",
       },
       secondary: {
         main: "#000000",
+        lighter: "#31393C",
       },
     },
     spacing: 10,

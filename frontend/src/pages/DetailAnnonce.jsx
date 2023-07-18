@@ -52,6 +52,14 @@ export default function DetailAnnonce() {
         justifyContent: "space-evenly",
       }}
     >
+      <Button
+        type="button"
+        variant="outlined"
+        sx={{ color: "#FDCA40" }}
+        onClick={() => navigate("/annonces")}
+      >
+        Retour aux Annonces
+      </Button>
       <Card sx={{ width: { xs: "100%", md: "90%", lg: "80%" }, height: 650 }}>
         <CardMedia
           component="img"
@@ -127,14 +135,6 @@ export default function DetailAnnonce() {
           </Grid>
         </CardContent>
       </Card>
-      <Button
-        type="button"
-        variant="outlined"
-        color="primary"
-        onClick={() => navigate("/annonces")}
-      >
-        Retour aux Annonces
-      </Button>
     </Container>
   );
 }

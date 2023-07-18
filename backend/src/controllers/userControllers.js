@@ -1,3 +1,6 @@
+const fs = require("fs");
+
+const { v4: uuidv4 } = require("uuid");
 const models = require("../models");
 
 const profile = (req, res) => {
@@ -15,6 +18,27 @@ const profile = (req, res) => {
       console.error(err);
       res.sendStatus(500);
     });
+};
+
+const uploadPhoto = async (req, res) => {
+  const { originalname, filename } = req.file;
+  const photoPath = `${uuidv4()}-${originalname}`;
+
+  try {
+    await fs.promises.rename(
+      `./public/picture/${filename}`,
+      `./public/picture/${photoPath}`
+    );
+
+    await models.user.updatePicture({
+      id: req.payloads.sub,
+      profile_picture: photoPath,
+    });
+    res.send({ photoPath });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 };
 
 const browse = (req, res) => {
@@ -106,4 +130,6 @@ module.exports = {
   edit,
   add,
   destroy,
+
+  uploadPhoto,
 };
