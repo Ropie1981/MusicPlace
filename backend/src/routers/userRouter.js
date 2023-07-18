@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 
 const userRouter = express.Router();
 
@@ -13,13 +14,23 @@ const {
   register,
 } = require("../controllers/authControllers");
 
+const uploadPicture = multer({
+  dest: "./public/picture/",
+  limits: { fileSize: 5000000000000 }, // limit file size to 5000000000000bytes
+});
+
+const userControllers = require("../controllers/userControllers");
 // Public routes
 // Auth
 userRouter.post("/register", hashPassword, register);
 userRouter.post("/login", getUserByEmailMiddleWare, verifyPassword);
 userRouter.get("/logout", logout);
-
-const userControllers = require("../controllers/userControllers");
+userRouter.post(
+  "/maPhoto",
+  verifyToken,
+  uploadPicture.single("maPhoto"),
+  userControllers.uploadPhoto
+);
 
 userRouter.get("/profile", verifyToken, userControllers.profile);
 

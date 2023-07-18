@@ -23,7 +23,7 @@ function App() {
     palette: {
       mode,
       primary: {
-        main: "#DACC3E",
+        main: "#FFAD0D",
       },
       secondary: {
         main: "#000000",

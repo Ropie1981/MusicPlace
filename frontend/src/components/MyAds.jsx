@@ -82,7 +82,7 @@ export default function MyAds() {
               color="initial"
               sx={{
                 p: 2,
-                backgroundColor: "primary.main",
+                backgroundColor: "#FFAD0D",
                 color: "white",
                 borderRadius: 2,
               }}

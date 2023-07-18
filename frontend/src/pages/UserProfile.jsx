@@ -25,6 +25,7 @@ export default function UserProfile() {
       <Typography variant="h4" sx={{ my: 2 }} color="primary">
         Mon Compte:
       </Typography>
+      <UserInfos />
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box
@@ -47,9 +48,6 @@ export default function UserProfile() {
           <Button variant="outlined" onClick={handlePublishAd}>
             Publier une Annonce
           </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <UserInfos user={user} />
         </Grid>
         <Grid item xs={12} md={6}>
           <MyAds user={user} />
