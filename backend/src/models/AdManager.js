@@ -20,6 +20,13 @@ class AdManager extends AbstractManager {
     );
   }
 
+  findAdsByUserId(userId) {
+    return this.database.query(
+      `select * from  ${this.table} where user_id = ${userId}`,
+      [userId]
+    );
+  }
+
   insert(ad) {
     return this.database.query(
       `insert into ${this.table} (

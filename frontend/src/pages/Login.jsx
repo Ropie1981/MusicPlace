@@ -36,7 +36,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const notifyLogin = () => toast.success(`Connexion Réussie !`);
+  const notifyLogin = () => toast.success(`Connexion Réussie!`);
 
   const navigate = useNavigate();
 

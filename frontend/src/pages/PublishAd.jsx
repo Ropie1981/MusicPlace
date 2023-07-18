@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +14,7 @@ import DragDropFile from "../components/DragDropFile/DragDropFile";
 import { useUserContext } from "../Contexts/userContext";
 
 export default function PublishAd() {
+  const navigate = useNavigate();
   const { user } = useUserContext();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -65,6 +67,12 @@ export default function PublishAd() {
         notifyCreationError();
       });
   };
+
+  useEffect(() => {
+    if (!user?.id) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Container
