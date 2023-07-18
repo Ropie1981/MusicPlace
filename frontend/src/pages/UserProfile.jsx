@@ -22,12 +22,9 @@ export default function UserProfile() {
 
   return (
     <Container maxWidth="xxl" align="center">
-      <Typography variant="h4" sx={{ my: 2 }} color="primary">
-        Mon Compte:
-      </Typography>
       <UserInfos />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <Box
             sx={{
               borderRadius: 3,
@@ -41,15 +38,22 @@ export default function UserProfile() {
           <Typography variant="body1" sx={{ mt: 2 }} color="text.secondary">
             Vous êtes connecté en tant que :
           </Typography>
-          <Typography variant="h5" sx={{ mb: 2 }} color="primary">
+          <Typography variant="body1" sx={{ mb: 2 }} color="text.secondary">
             {user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}{" "}
             {user.lastname.charAt(0).toUpperCase() + user.lastname.slice(1)}
           </Typography>
-          <Button variant="outlined" onClick={handlePublishAd}>
+          <Typography variant="body1" sx={{ my: 2 }} color="text.secondary">
+            Vous avez la possibilité de :
+          </Typography>
+          <Button
+            variant="outlined"
+            onClick={handlePublishAd}
+            sx={{ color: "#FDCA40" }}
+          >
             Publier une Annonce
           </Button>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           <MyAds user={user} />
         </Grid>
       </Grid>

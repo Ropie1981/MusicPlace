@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <NavLink color="inherit" href="https://mui.com/">
-        DevPaf
+        Pierre Saumont
       </NavLink>{" "}
       {new Date().getFullYear()}
     </Typography>

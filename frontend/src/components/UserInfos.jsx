@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
@@ -59,7 +58,7 @@ export default function UserInfos() {
           <Button
             variant="text"
             color="primary"
-            sx={{ fontSize: 9, fontWeight: 400, m: 1 }}
+            sx={{ fontSize: 9, fontWeight: 400, m: 1, color: "#FDCA40" }}
             onClick={handlePhotoOpen}
           >
             changer ma photo
@@ -130,25 +129,3 @@ export default function UserInfos() {
     </Card>
   );
 }
-
-UserInfos.propTypes = {
-  user: PropTypes.shape({
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    phone: PropTypes.string,
-    email: PropTypes.string,
-    city: PropTypes.string,
-    profile_picture: PropTypes.string,
-    cv: PropTypes.string,
-  }),
-};
-
-UserInfos.defaultProps = {
-  user: {
-    firstname: "prénom candidat",
-    lastname: "nom candidat",
-    email: "candidat@mail.com",
-    city: "Paris",
-    profile_picture: "https://xsgames.co/randomusers/avatar.php?g=female",
-  },
-};

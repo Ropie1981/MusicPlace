@@ -9,8 +9,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Backdrop from "@mui/material/Backdrop";
-import Link from "@mui/material/Link";
-import Avatar from "@mui/material/Avatar";
+import Modal from "@mui/material/Modal";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import ReactQuill from "react-quill";
@@ -23,11 +22,13 @@ export default function MyAds() {
   const [open, setOpen] = useState(false);
   const [myAds, setMyAds] = useState([]);
   const [selectedAd, setSelectedAd] = useState(null);
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleOpen = (ad) => {
     setSelectedAd(ad);
     setOpen(true);
@@ -38,16 +39,26 @@ export default function MyAds() {
   };
 
   const handleDelete = (id) => {
+    setSelectedAd(id);
+    setConfirmationOpen(true);
+  };
+
+  const handleDeleteConfirmed = () => {
     // Delete the ad from the backend
     axios
-      .delete(`${BACKEND_URL}/ads/${id}`, { withCredentials: true })
+      .delete(`${BACKEND_URL}/ads/${selectedAd}`, { withCredentials: true })
       .then(() => {
         // Call the onDelete function to update the frontend
-        onDelete(id);
+        onDelete(selectedAd);
+        setConfirmationOpen(false);
       })
       .catch((error) => {
         console.error(error);
       });
+  };
+
+  const handleConfirmationClose = () => {
+    setConfirmationOpen(false);
   };
 
   const config = {
@@ -76,18 +87,18 @@ export default function MyAds() {
     <Box sx={{ borderRadius: "1rem" }}>
       <Grid container spacing={4} justifyContent="flex-end">
         <Grid item xl={16} lg={12} elevation={3}>
-          <Paper sx={{ height: "100%" }}>
+          <Paper sx={{ height: "100%" }} elevation={3}>
             <Typography
               variant="h6"
               color="initial"
               sx={{
                 p: 2,
-                backgroundColor: "#FFAD0D",
+                backgroundColor: "primary.main",
                 color: "white",
                 borderRadius: 2,
               }}
             >
-              Mes Annonces
+              Mes Annonces Publiées :
             </Typography>
             {myAds.length === 0 ? (
               <Typography variant="body1" sx={{ p: 2 }}>
@@ -98,6 +109,7 @@ export default function MyAds() {
                 {myAds.map((ad) => (
                   <Grid item key={ad.id} xs={12} sm={6} md={4}>
                     <Card
+                      elevation={5}
                       sx={{
                         height: "100%",
                         display: "flex",
@@ -114,19 +126,29 @@ export default function MyAds() {
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
-                          {ad.name}
+                          {ad.title}
                         </Typography>
                         <ReactQuill
                           theme="bubble"
                           value={`${ad.description.slice(0, 150)}...`}
                           readOnly
                         />
+                        <Typography gutterBottom variant="h6" component="h2">
+                          Prix: {ad.price}€
+                        </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button size="small" onClick={() => handleOpen(ad)}>
-                          View
+                        <Button
+                          size="small"
+                          onClick={() => handleOpen(ad)}
+                          sx={{ color: "#FDCA40" }}
+                        >
+                          Voir Détail
                         </Button>
-                        <Button onClick={() => handleDelete(ad.id)}>
+                        <Button
+                          onClick={() => handleDelete(ad.id)}
+                          sx={{ color: "#FDCA40" }}
+                        >
                           Supprimer l'offre
                         </Button>
                       </CardActions>
@@ -143,176 +165,51 @@ export default function MyAds() {
               open={open}
               onClick={handleClose}
             >
+              {/* Existing code for the modal */}
+            </Backdrop>
+            <Modal
+              open={confirmationOpen}
+              onClose={handleConfirmationClose}
+              aria-labelledby="confirmation-modal-title"
+              aria-describedby="confirmation-modal-description"
+            >
               <Box
                 sx={{
-                  backgroundColor: "white",
-                  color: "black",
-                  marginRight: "1rem",
-                  marginLeft: "1rem",
-                  overflow: "auto",
-                  maxHeight: "600px",
-                  scrollbarWidth: "thin",
-                  scrollbarColor: "#888888 #f5f5f5",
-                  "&::-webkit-scrollbar": {
-                    width: "6px",
-                  },
-                  "&::-webkit-scrollbar-track": {
-                    backgroundColor: "#f5f5f5",
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    backgroundColor: "#888888",
-                    borderRadius: "3px",
-                  },
-                  "@media (min-width: 768px)": {
-                    marginRight: "3rem",
-                    marginLeft: "3rem",
-                  },
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  width: 400,
+                  bgcolor: "background.paper",
+                  boxShadow: 24,
+                  p: 4,
                 }}
               >
-                {selectedAd && (
-                  <Box
-                    sx={{
-                      "@media (min-width: 768px)": {
-                        display: "flex",
-                      },
-                    }}
-                  >
-                    <CardContent>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
-                        sx={{
-                          height: "77px",
-                          width: "77px",
-                          position: "absolute",
-                          mt: "-50px",
-                          mx: "auto",
-                          left: 0,
-                          right: 0,
-                        }}
-                      />
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {selectedAd.name}
-                      </Typography>
-                      <Typography gutterBottom variant="h5" component="h3">
-                        {selectedAd.title}
-                      </Typography>
-                      <ReactQuill
-                        theme="bubble"
-                        value={selectedAd.description}
-                        readOnly
-                      />
-                      <ReactQuill
-                        theme="bubble"
-                        value={selectedAd.requirements}
-                        readOnly
-                      />
-                      <Button onClick={() => handleDelete(selectedAd.id)}>
-                        Supprimer l'offre
-                      </Button>
-                    </CardContent>
-                    <CardContent>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            marginBottom: "0.2rem",
-                            marginLeft: "0.5rem",
-                            marginRight: "0.5rem",
-                          }}
-                        >
-                          {selectedAd.category}
-                        </Typography>
-                      </Paper>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography sx={{ marginBottom: "0.2rem" }}>
-                          {selectedAd.location}
-                        </Typography>
-                      </Paper>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography sx={{ marginBottom: "0.2rem" }}>
-                          {selectedAd.type}
-                        </Typography>
-                      </Paper>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography sx={{ marginBottom: "0.2rem" }}>
-                          {selectedAd.remote}
-                        </Typography>
-                      </Paper>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography sx={{ marginBottom: "0.2rem" }}>
-                          {selectedAd.salary}
-                        </Typography>
-                      </Paper>
-                      <Paper
-                        sx={{
-                          borderRadius: "0.8rem",
-                          border: "0.1px solid grey",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <Typography
-                          sx={{ marginLeft: "1rem", marginRight: "1rem" }}
-                        >
-                          {selectedAd.posting_date}
-                        </Typography>
-                      </Paper>
-                      <Link
-                        href={selectedAd.website}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Button
-                          variant="contained"
-                          size="small"
-                          sx={{ marginTop: "1rem" }}
-                        >
-                          Site Web
-                        </Button>
-                      </Link>
-
-                      <Button
-                        href={`mailto:${selectedAd.email}`}
-                        variant="contained"
-                        size="small"
-                        sx={{ marginTop: "1rem", marginLeft: "0.5rem" }}
-                      >
-                        Nous contacter
-                      </Button>
-                    </CardContent>
-                  </Box>
-                )}
+                <Typography
+                  id="confirmation-modal-title"
+                  variant="h6"
+                  color="primary"
+                  component="h2"
+                  gutterBottom
+                >
+                  Confirm Deletion
+                </Typography>
+                <Typography id="confirmation-modal-description" sx={{ mb: 2 }}>
+                  Are you sure you want to delete this ad?
+                </Typography>
+                <Button
+                  onClick={handleDeleteConfirmed}
+                  variant="contained"
+                  color="error"
+                  sx={{ mr: 2 }}
+                >
+                  Confirm
+                </Button>
+                <Button onClick={handleConfirmationClose} variant="outlined">
+                  Cancel
+                </Button>
               </Box>
-            </Backdrop>
+            </Modal>
           </Paper>
         </Grid>
       </Grid>

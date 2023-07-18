@@ -105,7 +105,11 @@ export default function DragDropFile({ handlePhotoClose }) {
         htmlFor="input-file-upload"
         className={dragActive ? "drag-active" : ""}
       >
-        <IconButton aria-label="delete" sx={{ alignSelf: "flex-end" }}>
+        <IconButton
+          aria-label="delete"
+          sx={{ alignSelf: "flex-end" }}
+          onClick={handlePhotoClose}
+        >
           {" "}
           <CloseIcon color="secondary" />
         </IconButton>
