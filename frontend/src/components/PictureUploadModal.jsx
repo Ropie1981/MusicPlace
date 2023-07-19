@@ -153,7 +153,11 @@ function PictureUploadModal({ adId, open, onClose }) {
 export default PictureUploadModal;
 
 PictureUploadModal.propTypes = {
-  adId: PropTypes.number.isRequired,
+  adId: PropTypes.number,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+};
+
+PictureUploadModal.defaultProps = {
+  adId: PropTypes.number,
 };

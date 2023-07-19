@@ -74,9 +74,9 @@ CREATE TABLE gear_category (
 
 INSERT INTO user (id, firstname, lastname, email, hashedPassword, bio, city, phone, profile_picture, registration_date, admin)
 VALUES
-  (1, 'admin', 'test', 'admin@mail.com', 'adminpass', 'I am a musician.', 'New York', '123-456-7890', 'profile1.jpg', '2023-01-01', 0),
-  (2, 'Jane', 'Smith', 'mail1@mail.com', 'p@ssw0rd', 'Pianist and composer.', 'Los Angeles', '987-654-3210', 'profile2.jpg', '2022-11-15', 0),
-  (3, 'Michael', 'Johnson', 'mail2@mail.com', 'mypass123', 'Guitarist and songwriter.', 'Chicago', '555-123-4567', 'profile3.jpg', '2023-03-10', 0),
+  (1, 'admin', 'test', 'admin@mail.com', '$argon2id$v=19$m=65536,t=3,p=4$Rkfivx8mkJszjhbQQ1Gv3g$IUGYr+UXFlZZCXxKGGhUyIK+yrB0gLZVq1Gc3Lka98o', 'I am a musician.', 'New York', '123-456-7890', 'profile1.jpg', '2023-01-01', 1),
+  (2, 'Jane', 'Smith', 'mail1@mail.com', '$argon2id$v=19$m=65536,t=3,p=4$Rkfivx8mkJszjhbQQ1Gv3g$IUGYr+UXFlZZCXxKGGhUyIK+yrB0gLZVq1Gc3Lka98o', 'Pianist and composer.', 'Los Angeles', '987-654-3210', 'profile2.jpg', '2022-11-15', 0),
+  (3, 'Michael', 'Johnson', 'mail2@mail.com', '$argon2id$v=19$m=65536,t=3,p=4$Rkfivx8mkJszjhbQQ1Gv3g$IUGYr+UXFlZZCXxKGGhUyIK+yrB0gLZVq1Gc3Lka98o', 'Guitarist and songwriter.', 'Chicago', '555-123-4567', 'profile3.jpg', '2023-03-10', 0),
   (4, 'Emily', 'Wilson', 'mail3@mail.com', 'securepass', 'Bassist and music teacher.', 'San Francisco', '111-222-3333', 'profile4.jpg', '2023-02-20', 0),
   (5, 'David', 'Lee', 'mail4@mail.com', 'davidpass', 'Drummer in a rock band.', 'Austin', '444-555-6666', 'profile5.jpg', '2023-04-05', 0),
   (6, 'Sophia', 'Taylor', 'mail5@mail.com', 'password123', 'Singer and vocal coach.', 'Nashville', '777-888-9999', 'profile6.jpg', '2023-03-01', 0),
