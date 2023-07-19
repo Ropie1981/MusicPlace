@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AdCard from "../components/AdCard";
 import Categories from "../components/Categories";
+import "animate.css";
 
 function Annonces() {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -53,6 +54,7 @@ function Annonces() {
               md={6}
               lg={4}
               justifyContent="center"
+              className="animate__animated animate__fadeInUp"
             >
               <AdCard ad={ad} />
             </Grid>

@@ -70,6 +70,13 @@ class AdManager extends AbstractManager {
       ]
     );
   }
+
+  updatePicture(ad) {
+    return this.database.query(
+      `update ${this.table} set picture = ? where id = ${ad.id}`,
+      [ad.picture]
+    );
+  }
 }
 
 module.exports = AdManager;

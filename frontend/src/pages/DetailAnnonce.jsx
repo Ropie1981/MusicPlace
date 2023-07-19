@@ -4,14 +4,17 @@ import axios from "axios";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useUserContext } from "../Contexts/userContext";
 import keyboard from "../assets/keyboard.jpg";
 
 export default function DetailAnnonce() {
+  const { user } = useUserContext();
   const navigate = useNavigate();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const { id } = useParams();
@@ -42,7 +45,7 @@ export default function DetailAnnonce() {
 
   return (
     <Container
-      maxWidth="xl"
+      maxWidth="lg"
       disableGutters
       sx={{
         height: "100vh",
@@ -52,14 +55,30 @@ export default function DetailAnnonce() {
         justifyContent: "space-evenly",
       }}
     >
-      <Button
-        type="button"
-        variant="outlined"
-        sx={{ color: "#FDCA40" }}
-        onClick={() => navigate("/annonces")}
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        spacing={2}
+        justifyContent="center"
       >
-        Retour aux Annonces
-      </Button>
+        <Button
+          type="button"
+          variant="outlined"
+          sx={{ color: "#FDCA40" }}
+          onClick={() => navigate("/annonces")}
+        >
+          Retour aux Annonces
+        </Button>
+        {user.id && (
+          <Button
+            type="button"
+            variant="outlined"
+            sx={{ color: "#FDCA40" }}
+            onClick={() => navigate("/profile")}
+          >
+            Retour au Profil
+          </Button>
+        )}
+      </Stack>
       <Card sx={{ width: { xs: "100%", md: "90%", lg: "80%" }, height: 650 }}>
         <CardMedia
           component="img"

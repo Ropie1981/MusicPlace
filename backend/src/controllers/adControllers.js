@@ -1,3 +1,7 @@
+const fs = require("fs");
+
+const { v4: uuidv4 } = require("uuid");
+
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -62,20 +66,19 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
-  const ad = req.body;
+const add = async (req, res) => {
+  try {
+    const ad = req.body;
 
-  // TODO validations (length, format...)
+    // TODO validations (length, format...)
 
-  models.ad
-    .insert(ad)
-    .then(([result]) => {
-      res.location(`/ads/${result.insertId}`).sendStatus(201);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+    const [result] = await models.ad.insert(ad);
+    const insertedId = result.insertId;
+    res.status(201).json({ id: insertedId }); // Send the inserted ID in the response
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 };
 
 const destroy = (req, res) => {
@@ -94,6 +97,27 @@ const destroy = (req, res) => {
     });
 };
 
+const uploadPhoto = async (req, res) => {
+  const { originalname, filename } = req.file;
+  const photoPath = `${uuidv4()}-${originalname}`;
+
+  try {
+    await fs.promises.rename(
+      `./public/picture/${filename}`,
+      `./public/picture/${photoPath}`
+    );
+
+    await models.ad.updatePicture({
+      id: req.body.id,
+      picture: photoPath,
+    });
+    res.send({ photoPath });
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -101,4 +125,5 @@ module.exports = {
   add,
   destroy,
   browseByUserId,
+  uploadPhoto,
 };

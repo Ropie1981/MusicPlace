@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -18,6 +19,7 @@ import "react-quill/dist/quill.snow.css";
 import { useUserContext } from "../Contexts/userContext";
 
 export default function MyAds() {
+  const navigate = useNavigate();
   const { user } = useUserContext();
   const [open, setOpen] = useState(false);
   const [myAds, setMyAds] = useState([]);
@@ -31,7 +33,7 @@ export default function MyAds() {
 
   const handleOpen = (ad) => {
     setSelectedAd(ad);
-    setOpen(true);
+    navigate(`/annonces/${ad.id}`);
   };
 
   const onDelete = (id) => {
