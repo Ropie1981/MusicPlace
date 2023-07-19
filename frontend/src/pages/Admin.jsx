@@ -18,7 +18,7 @@ function Admin() {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2, textAlign: "center" }}>
-      <Typography variant="h4" color="primary" sx={{ py: 4 }}>
+      <Typography variant="h4" color="text.main" sx={{ py: 2 }}>
         Page Administrateur
       </Typography>
       <Box fullwidth>

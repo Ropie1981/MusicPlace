@@ -20,20 +20,31 @@ function AdminNav() {
       justifyContent="center"
       alignItems="center"
       divider={<Divider light flexItem />}
-      sx={{ p: 4 }}
+      sx={{ p: 3 }}
     >
       <Button
         size="large"
-        variant="outlined"
-        sx={{ width: 250 }}
+        variant="text"
+        sx={{
+          width: 250,
+          color: "#FDCA40",
+          borderColor: "#FDCA40",
+          "& .MuiButton:hover": {
+            color: "#FDCA40",
+          },
+        }}
         onClick={handleLinkUsersAdmin}
       >
         Utilisateurs
       </Button>
       <Button
         size="large"
-        variant="outlined"
-        sx={{ width: 250 }}
+        variant="text"
+        sx={{
+          width: 250,
+          color: "primary.light",
+          borderColor: "primary.light",
+        }}
         onClick={handleLinkAdsAdmin}
       >
         Annonces
