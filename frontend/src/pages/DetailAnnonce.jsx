@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useUserContext } from "../Contexts/userContext";
-import keyboard from "../assets/keyboard.jpg";
+// import keyboard from "../assets/keyboard.jpg";
 
 export default function DetailAnnonce() {
   const { user } = useUserContext();
@@ -42,6 +42,8 @@ export default function DetailAnnonce() {
   const dateString = `${ad.publish_date}`;
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString("fr-FR", options);
+
+  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
 
   return (
     <Container
@@ -83,7 +85,7 @@ export default function DetailAnnonce() {
         <CardMedia
           component="img"
           height="300"
-          image={keyboard}
+          image={imagePath}
           alt="ad picture"
         />
         <CardContent>
