@@ -120,7 +120,7 @@ export default function DragDropFile({ handlePhotoClose }) {
             className="upload-button"
             onClick={onButtonClick}
           >
-            Upload a picture for your Ad & click Send
+            Upload a picture for your Profile & click Send
           </button>{" "}
           {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
           {/* Display the selected file name */}

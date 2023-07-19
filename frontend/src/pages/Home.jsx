@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 import MusicGear from "../assets/musicGear.jpg";
 import { useUserContext } from "../Contexts/userContext";
+import "animate.css";
 
 export default function Home() {
   const { user } = useUserContext();
@@ -48,6 +49,7 @@ export default function Home() {
           image={MusicPlaceL}
           title="header logo"
           align="center"
+          className="animate__animated animate__rubberBand"
         />
       </Box>
       <Box
@@ -65,6 +67,7 @@ export default function Home() {
           image={MusicGear}
           title="header logo"
           align="center"
+          className="animate__animated animate__fadeIn"
         />
       </Box>
       <Box

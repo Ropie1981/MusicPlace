@@ -71,7 +71,17 @@ AdCard.propTypes = {
   ad: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    picture: PropTypes.string,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+};
+
+AdCard.defaultProps = {
+  ad: {
+    title: "Add Title",
+    picture: { keyboard },
+    price: "à confirmer",
+    description: "description for the ad",
+  },
 };
