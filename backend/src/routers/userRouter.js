@@ -24,7 +24,10 @@ const userControllers = require("../controllers/userControllers");
 // Auth
 userRouter.post("/register", hashPassword, register);
 userRouter.post("/login", getUserByEmailMiddleWare, verifyPassword);
+userRouter.get("/profile", verifyToken, userControllers.profile);
+userRouter.put("/users/:id", verifyToken, userControllers.edit);
 userRouter.get("/logout", logout);
+userRouter.delete("/users/:id", verifyToken, userControllers.destroy);
 userRouter.post(
   "/maPhoto",
   verifyToken,
@@ -32,12 +35,8 @@ userRouter.post(
   userControllers.uploadPhoto
 );
 
-userRouter.get("/profile", verifyToken, userControllers.profile);
-
 userRouter.get("/users", userControllers.browse);
 userRouter.get("/users/:id", userControllers.read);
-userRouter.put("/users/:id", userControllers.edit);
 userRouter.post("/users", userControllers.add);
-userRouter.delete("/users/:id", userControllers.destroy);
 
 module.exports = userRouter;

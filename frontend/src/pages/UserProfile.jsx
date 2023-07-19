@@ -5,9 +5,9 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useUserContext } from "../Contexts/userContext";
 import UserInfos from "../components/UserInfos";
 import MyAds from "../components/MyAds";
-import { useUserContext } from "../Contexts/userContext";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 
 export default function UserProfile() {

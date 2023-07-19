@@ -10,7 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
-import keyboard from "../assets/keyboard.jpg";
+// import keyboard from "../assets/keyboard.jpg";
 
 export default function AdCard({ ad }) {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function AdCard({ ad }) {
         <CardMedia
           component="img"
           height="140"
-          image={keyboard}
+          image="https://source.unsplash.com/random?wallpaper"
           alt="ad picture"
         />
         <CardContent>
@@ -79,8 +79,8 @@ AdCard.propTypes = {
 
 AdCard.defaultProps = {
   ad: {
-    title: "Add Title",
-    picture: { keyboard },
+    title: "Ad Title",
+    picture: "https://generatorfun.com/random-instrument-image",
     price: "à confirmer",
     description: "description for the ad",
   },
