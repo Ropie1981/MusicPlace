@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
@@ -9,12 +9,19 @@ import Backdrop from "@mui/material/Backdrop";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
+import EditIcon from "@mui/icons-material/Edit";
 import DragDropFiles from "./DragDropFile/DragDropFile";
+import UpdateUserModal from "./UpdateUserModal";
 import { useUserContext } from "../Contexts/userContext";
 
 export default function UserInfos() {
   const { user } = useUserContext();
-  const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [openPhoto, setOpenPhoto] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const openUpdateModal = () => {
+    setOpenModal(true);
+  };
 
   const handlePhotoClose = () => {
     setOpenPhoto(false);
@@ -50,11 +57,13 @@ export default function UserInfos() {
             alignItems: "center",
           }}
         >
-          <Avatar
-            alt="user Picture"
-            src={imagePath}
-            sx={{ width: 100, height: 100 }}
-          />
+          {user && (
+            <Avatar
+              alt="user Picture"
+              src={imagePath}
+              sx={{ width: 100, height: 100 }}
+            />
+          )}
           <Button
             variant="text"
             color="primary"
@@ -82,16 +91,16 @@ export default function UserInfos() {
             </Box>
           </Backdrop>
         </Box>
-
         <CardContent
           sx={{
             mr: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
+            justifyContent: "space-evenly",
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+          <Box sx={{ display: "flex", alignItems: "flex-start", ml: 0.8 }}>
             <LocationCityIcon />
             <Typography
               variant="body1"
@@ -102,7 +111,7 @@ export default function UserInfos() {
               {user.city.charAt(0).toUpperCase() + user.city.slice(1)}
             </Typography>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+          <Box sx={{ display: "flex", alignItems: "flex-start", ml: 0.8 }}>
             <MailIcon />
             <Typography
               variant="body1"
@@ -113,7 +122,7 @@ export default function UserInfos() {
               {user.email}
             </Typography>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+          <Box sx={{ display: "flex", alignItems: "flex-start", ml: 0.8 }}>
             <PhoneIcon />
             <Typography
               variant="body1"
@@ -124,8 +133,24 @@ export default function UserInfos() {
               {user.phone}
             </Typography>
           </Box>
+          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+            <Button
+              variant="text"
+              onClick={openUpdateModal}
+              sx={{
+                color: "#FDCA40",
+                fontSize: 11,
+                fontWeight: 400,
+                mt: 3,
+              }}
+            >
+              <EditIcon sx={{ mr: 1 }} /> Modifier mes Infos
+            </Button>
+          </Box>
         </CardContent>
       </Box>
+
+      <UpdateUserModal open={openModal} onClose={() => setOpenModal(false)} />
     </Card>
   );
 }

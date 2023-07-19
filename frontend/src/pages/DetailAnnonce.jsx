@@ -43,7 +43,7 @@ export default function DetailAnnonce() {
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString("fr-FR", options);
 
-  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
+  // const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
 
   return (
     <Container
@@ -85,7 +85,7 @@ export default function DetailAnnonce() {
         <CardMedia
           component="img"
           height="300"
-          image={imagePath}
+          image="https://source.unsplash.com/random?music"
           alt="ad picture"
         />
         <CardContent>
