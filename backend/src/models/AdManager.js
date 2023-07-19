@@ -20,6 +20,13 @@ class AdManager extends AbstractManager {
     );
   }
 
+  findAdsByUserId(userId) {
+    return this.database.query(
+      `select * from  ${this.table} where user_id = ${userId}`,
+      [userId]
+    );
+  }
+
   insert(ad) {
     return this.database.query(
       `insert into ${this.table} (
@@ -61,6 +68,13 @@ class AdManager extends AbstractManager {
         ad.description,
         ad.id,
       ]
+    );
+  }
+
+  updatePicture(ad) {
+    return this.database.query(
+      `update ${this.table} set picture = ? where id = ${ad.id}`,
+      [ad.picture]
     );
   }
 }

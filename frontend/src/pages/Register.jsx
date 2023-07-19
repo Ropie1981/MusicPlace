@@ -3,8 +3,6 @@ import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -23,7 +21,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Externatic/Wild Code School
+        Pierre Saumont
       </Link>{" "}
       {new Date().getFullYear()}
     </Typography>
@@ -181,14 +179,6 @@ export default function Register() {
                   id="password"
                   autoComplete="new-password"
                   onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="Je veux recevoir les offres d'emploi par mail"
                 />
               </Grid>
             </Grid>
