@@ -62,6 +62,10 @@ export default function Login() {
     }
   };
 
+  const handleLinkRegister = () => {
+    navigate("/register");
+  };
+
   const handleChange = (e) => {
     setUserInfos({
       ...userInfos,
@@ -97,7 +101,9 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Box sx={{ borderRadius: 2, overflow: "hidden", display: "flex" }}>
+          <Box
+            sx={{ borderRadius: 2, overflow: "hidden", display: "flex", my: 2 }}
+          >
             <img src={MusicPlaceL} alt="logo" width="200px" />
           </Box>
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
@@ -148,7 +154,22 @@ export default function Login() {
             >
               Login
             </Button>
-
+            <Box
+              sx={{
+                my: 4,
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                onClick={handleLinkRegister}
+                variant="text"
+                sx={{ color: "#FDCA40" }}
+              >
+                "Nouveau chez nous? Créer un compte"
+              </Button>
+            </Box>
             <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>
