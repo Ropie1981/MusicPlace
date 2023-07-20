@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import CloseIcon from "@mui/icons-material/Close";
 import "react-toastify/dist/ReactToastify.css";
-import { useUserContext } from "../../Contexts/userContext";
+import { useUserContext } from "../../../Contexts/userContext";
 import "./DragDropFile.css";
 
 // drag drop file component
