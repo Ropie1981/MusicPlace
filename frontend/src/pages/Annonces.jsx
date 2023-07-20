@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 // import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AdCard from "../components/Ad/AdCard";
 import Categories from "../components/Ad/Categories";
+import APIService from "../services/APIService";
 import "animate.css";
 
 function Annonces() {
@@ -12,8 +12,7 @@ function Annonces() {
   const [ads, setAds] = useState([]);
 
   const getAds = () => {
-    axios
-      .get(`${BACKEND_URL}/ads`)
+    APIService.get(`${BACKEND_URL}/ads`)
       .then((response) => {
         setAds(response.data);
       })

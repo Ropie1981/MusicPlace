@@ -30,10 +30,12 @@ app.use(
 const router = require("./routers/router");
 const userRouter = require("./routers/userRouter");
 const adRouter = require("./routers/adRouter");
+const routerSendEmail = require("./routers/routerSendEmail");
 
 app.use(router);
 app.use(userRouter);
 app.use(adRouter);
+app.use(routerSendEmail);
 
 // serve the `backend/public` folder for public resources
 
