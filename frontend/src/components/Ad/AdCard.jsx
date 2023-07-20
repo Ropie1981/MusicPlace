@@ -11,24 +11,52 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
 import keyboard from "../../assets/keyboard.jpg";
-import guitar from "../../assets/gretsch.jpeg";
-import MusicMAn from "../../assets/musicMan.png";
+import piano from "../../assets/piano.jpeg";
+import guitar1 from "../../assets/gretsch.jpeg";
+import bass from "../../assets/musicMan.png";
+import violin from "../../assets/violin.jpeg";
 import tuba from "../../assets/tuba.png";
-import strat from "../../assets/strat.jpeg";
-import tama from "../../assets/tama-rhythm-mate.jpg";
+import guitar2 from "../../assets/strat.jpeg";
+import trumpet from "../../assets/trumpet.jpeg";
+import trombone from "../../assets/trombone.jpeg";
+import saxophone from "../../assets/sax.jpeg";
+import cello from "../../assets/cello.jpeg";
+import drum from "../../assets/tama-rhythm-mate.jpg";
 
 export default function AdCard({ ad }) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
 
   const navigate = useNavigate();
   const handleLinkDetail = () => {
     navigate(`/annonces/${ad.id}`);
   };
 
-  const imagesArray = [keyboard, guitar, MusicMAn, tuba, strat, tama];
+  const imagesArray = {
+    drum,
+    tuba,
+    keyboard,
+    piano,
+    guitar: guitar1 || guitar2,
+    bass,
+    saxophone,
+    trombone,
+    violin,
+    trumpet,
+    cello,
+  };
   const randomIndex = Math.floor(Math.random() * imagesArray.length);
   const randomImage = imagesArray[randomIndex];
+  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
+
+  const selectImage = (title) => {
+    const lowerCaseTitle = title.toLowerCase();
+    for (const key in imagesArray) {
+      if (lowerCaseTitle.includes(key.toLowerCase())) {
+        return imagesArray[key];
+      }
+    }
+    return randomImage;
+  };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -44,7 +72,7 @@ export default function AdCard({ ad }) {
           <CardMedia
             component="img"
             height="140"
-            image={randomImage}
+            image={selectImage(ad.title)}
             alt="ad picture"
           />
         )}

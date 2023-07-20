@@ -12,11 +12,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useUserContext } from "../Contexts/userContext";
 import keyboard from "../assets/keyboard.jpg";
-import guitar from "../assets/gretsch.jpeg";
-import MusicMAn from "../assets/musicMan.png";
+import piano from "../assets/piano.jpeg";
+import guitar1 from "../assets/gretsch.jpeg";
+import bass from "../assets/musicMan.png";
+import violin from "../assets/violin.jpeg";
 import tuba from "../assets/tuba.png";
-import strat from "../assets/strat.jpeg";
-import tama from "../assets/tama-rhythm-mate.jpg";
+import guitar2 from "../assets/strat.jpeg";
+import trumpet from "../assets/trumpet.jpeg";
+import trombone from "../assets/trombone.jpeg";
+import saxophone from "../assets/sax.jpeg";
+import cello from "../assets/cello.jpeg";
+import drum from "../assets/tama-rhythm-mate.jpg";
 
 export default function DetailAnnonce() {
   const { user } = useUserContext();
@@ -48,10 +54,32 @@ export default function DetailAnnonce() {
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString("fr-FR", options);
 
-  const imagesArray = [keyboard, guitar, MusicMAn, tuba, strat, tama];
+  const imagesArray = {
+    drum,
+    tuba,
+    keyboard,
+    piano,
+    guitar: guitar1 || guitar2,
+    bass,
+    saxophone,
+    trombone,
+    violin,
+    trumpet,
+    cello,
+  };
   const randomIndex = Math.floor(Math.random() * imagesArray.length);
   const randomImage = imagesArray[randomIndex];
   const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
+
+  const selectImage = (title) => {
+    const lowerCaseTitle = title.toLowerCase();
+    for (const key in imagesArray) {
+      if (lowerCaseTitle.includes(key.toLowerCase())) {
+        return imagesArray[key];
+      }
+    }
+    return randomImage;
+  };
 
   return (
     <Container
@@ -93,7 +121,7 @@ export default function DetailAnnonce() {
         {ad.picture !== null ? (
           <CardMedia
             component="img"
-            height="140"
+            height="340"
             image={imagePath}
             alt="ad picture"
           />
@@ -101,7 +129,7 @@ export default function DetailAnnonce() {
           <CardMedia
             component="img"
             height="140"
-            image={randomImage}
+            image={selectImage(ad.title)}
             alt="ad picture"
           />
         )}
