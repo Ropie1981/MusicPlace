@@ -29,7 +29,7 @@ CREATE TABLE ad (
   city VARCHAR(50),
   picture VARCHAR(255),
   PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE instrument (
