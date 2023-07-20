@@ -8,8 +8,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { toast } from "react-toastify";
 // import Container from "@mui/material/Container";
-import APIService from "../services/APIService";
-import { useUserContext } from "../Contexts/userContext";
+import APIService from "../../services/APIService";
+import { useUserContext } from "../../Contexts/userContext";
 
 function UpdateUserModal({ open, onClose }) {
   const notifyCreation = () => toast("Votre compte a bien été modifié !");

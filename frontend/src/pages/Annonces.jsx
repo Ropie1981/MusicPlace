@@ -3,8 +3,8 @@ import axios from "axios";
 // import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import AdCard from "../components/AdCard";
-import Categories from "../components/Categories";
+import AdCard from "../components/Ad/AdCard";
+import Categories from "../components/Ad/Categories";
 import "animate.css";
 
 function Annonces() {

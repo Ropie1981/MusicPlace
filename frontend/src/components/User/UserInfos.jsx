@@ -11,7 +11,7 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EditIcon from "@mui/icons-material/Edit";
-import DragDropFiles from "./DragDropFile/DragDropFile";
+import DragDropFiles from "../DragDropFile/DragDropFile";
 import UpdateUserModal from "./UpdateUserModal";
 
 export default function UserInfos({ user }) {

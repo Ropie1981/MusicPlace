@@ -16,7 +16,7 @@ import CardMedia from "@mui/material/CardMedia";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import { useUserContext } from "../Contexts/userContext";
+import { useUserContext } from "../../Contexts/userContext";
 
 export default function MyAds() {
   const navigate = useNavigate();
