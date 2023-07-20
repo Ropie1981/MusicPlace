@@ -111,7 +111,7 @@ export default function Home() {
       </Box>
       <Box>
         <Typography
-          variant="body1"
+          variant="h6"
           color="text.secondary"
           sx={{ px: { xs: 4, md: 8, lg: 12 }, py: 3, textAlign: "center" }}
         >
