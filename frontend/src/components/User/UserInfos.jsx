@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,14 +11,14 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import MailIcon from "@mui/icons-material/Mail";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EditIcon from "@mui/icons-material/Edit";
-import DragDropFiles from "../DragDropFile/DragDropFile";
+import DragDropFiles from "./DragDropFile/DragDropFile";
 import UpdateUserModal from "./UpdateUserModal";
 
 export default function UserInfos({ user }) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const [openPhoto, setOpenPhoto] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [imagePath, setImagePath] = useState(null);
+  const imagePath = `${BACKEND_URL}/picture/${user.profile_picture}`;
 
   const openUpdateModal = () => {
     setOpenModal(true);
@@ -30,15 +30,6 @@ export default function UserInfos({ user }) {
   const handlePhotoOpen = () => {
     setOpenPhoto(true);
   };
-
-  useEffect(() => {
-    // Update the imagePath whenever the user's picture is updated
-    if (user.profil_picture) {
-      setImagePath(`${BACKEND_URL}/picture/${user.profil_picture}`);
-    } else {
-      setImagePath(`${BACKEND_URL}/picture/default.png`);
-    }
-  }, [user.profil_picture]);
 
   return (
     <Card sx={{ maxWidth: "100%", mb: { xs: 3, md: 3 } }}>
@@ -165,7 +156,7 @@ UserInfos.propTypes = {
   user: PropTypes.shape({
     firstname: PropTypes.string,
     lastname: PropTypes.string,
-    profil_picture: PropTypes.string,
+    profile_picture: PropTypes.string,
     city: PropTypes.string,
     email: PropTypes.string,
     phone: PropTypes.string,
@@ -176,7 +167,7 @@ UserInfos.defaultProps = {
   user: PropTypes.shape({
     firstname: "USER FIRSTNAME",
     lastname: "USER LASTNAME",
-    profil_picture: "https://source.unsplash.com/random/user",
+    profile_picture: "https://source.unsplash.com/random/user",
     city: "Location",
     email: "example@mail.com",
     phone: "0102030405",
