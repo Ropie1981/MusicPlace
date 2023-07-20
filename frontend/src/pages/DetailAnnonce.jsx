@@ -232,13 +232,19 @@ export default function DetailAnnonce() {
                     }}
                     elevation={5}
                   >
-                    <Button
-                      type="button"
-                      variant="contained"
-                      onClick={() => setShowModal(true)}
-                    >
-                      Contacter le Vendeur
-                    </Button>
+                    {user.id ? (
+                      <Button
+                        type="button"
+                        variant="contained"
+                        onClick={() => setShowModal(true)}
+                      >
+                        Contacter le Vendeur
+                      </Button>
+                    ) : (
+                      <Typography variant="body1">
+                        Veuillez devez être connecté pour contacter le vendeur
+                      </Typography>
+                    )}
                   </Paper>
                 </Grid>
               </Grid>
