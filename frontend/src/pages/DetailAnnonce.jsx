@@ -11,7 +11,12 @@ import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useUserContext } from "../Contexts/userContext";
-// import keyboard from "../assets/keyboard.jpg";
+import keyboard from "../assets/keyboard.jpg";
+import guitar from "../assets/gretsch.jpeg";
+import MusicMAn from "../assets/musicMan.png";
+import tuba from "../assets/tuba.png";
+import strat from "../assets/strat.jpeg";
+import tama from "../assets/tama-rhythm-mate.jpg";
 
 export default function DetailAnnonce() {
   const { user } = useUserContext();
@@ -43,7 +48,10 @@ export default function DetailAnnonce() {
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString("fr-FR", options);
 
-  // const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
+  const imagesArray = [keyboard, guitar, MusicMAn, tuba, strat, tama];
+  const randomIndex = Math.floor(Math.random() * imagesArray.length);
+  const randomImage = imagesArray[randomIndex];
+  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
 
   return (
     <Container
@@ -82,12 +90,21 @@ export default function DetailAnnonce() {
         )}
       </Stack>
       <Card sx={{ width: { xs: "100%", md: "90%", lg: "80%" }, height: 650 }}>
-        <CardMedia
-          component="img"
-          height="300"
-          image="https://source.unsplash.com/random?music"
-          alt="ad picture"
-        />
+        {ad.picture !== null ? (
+          <CardMedia
+            component="img"
+            height="140"
+            image={imagePath}
+            alt="ad picture"
+          />
+        ) : (
+          <CardMedia
+            component="img"
+            height="140"
+            image={randomImage}
+            alt="ad picture"
+          />
+        )}
         <CardContent>
           <Grid container spacing={1}>
             <Grid item xs={12} md={8}>

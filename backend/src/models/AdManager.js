@@ -7,7 +7,7 @@ class AdManager extends AbstractManager {
 
   find(id) {
     return this.database.query(
-      `select ${this.table}.*, user.email, user.firstname, user.lastname, user.phone from ${this.table} AS ad JOIN user ON ad.user_id = user.idwhere ad.id = ?`,
+      `select ${this.table}.*, user.email, user.firstname, user.lastname, user.phone from ${this.table} AS ad JOIN user ON ad.user_id = user.id where ad.id = ?`,
       [id]
     );
   }

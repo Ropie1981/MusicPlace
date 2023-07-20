@@ -10,23 +10,44 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
-// import keyboard from "../assets/keyboard.jpg";
+import keyboard from "../../assets/keyboard.jpg";
+import guitar from "../../assets/gretsch.jpeg";
+import MusicMAn from "../../assets/musicMan.png";
+import tuba from "../../assets/tuba.png";
+import strat from "../../assets/strat.jpeg";
+import tama from "../../assets/tama-rhythm-mate.jpg";
 
 export default function AdCard({ ad }) {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const imagePath = `${BACKEND_URL}/picture/${ad.picture}`;
+
   const navigate = useNavigate();
   const handleLinkDetail = () => {
     navigate(`/annonces/${ad.id}`);
   };
 
+  const imagesArray = [keyboard, guitar, MusicMAn, tuba, strat, tama];
+  const randomIndex = Math.floor(Math.random() * imagesArray.length);
+  const randomImage = imagesArray[randomIndex];
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea onClick={handleLinkDetail}>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://source.unsplash.com/random?wallpaper"
-          alt="ad picture"
-        />
+        {ad.picture !== null ? (
+          <CardMedia
+            component="img"
+            height="140"
+            image={imagePath}
+            alt="ad picture"
+          />
+        ) : (
+          <CardMedia
+            component="img"
+            height="140"
+            image={randomImage}
+            alt="ad picture"
+          />
+        )}
         <CardContent>
           <Grid container spacing={1}>
             <Grid item xs={8}>
