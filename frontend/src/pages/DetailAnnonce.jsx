@@ -30,6 +30,7 @@ export default function DetailAnnonce() {
   const { user } = useUserContext();
   const navigate = useNavigate();
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const [ad, setAd] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -42,9 +43,11 @@ export default function DetailAnnonce() {
     APIService.get(`${BACKEND_URL}/ads/${id}`)
       .then((response) => {
         setAd(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         notifyError();
+        setLoading(false);
         console.error(error.message);
       });
   };
@@ -64,7 +67,7 @@ export default function DetailAnnonce() {
   const handleSendMessage = async (message) => {
     try {
       const emailData = {
-        to: "pierre.saumont@gmail.com",
+        to: ad.email,
         subject: `Au sujet de votre Annonce MusicPlace: ${ad.title}`,
         text: message,
         html: `<p>${message}</p>`,
@@ -123,124 +126,132 @@ export default function DetailAnnonce() {
         justifyContent: "space-evenly",
       }}
     >
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        spacing={2}
-        justifyContent="center"
-      >
-        <Button
-          type="button"
-          variant="outlined"
-          sx={{ color: "#FDCA40" }}
-          onClick={() => navigate("/annonces")}
-        >
-          Retour aux Annonces
-        </Button>
-        {user.id && (
-          <Button
-            type="button"
-            variant="outlined"
-            sx={{ color: "#FDCA40" }}
-            onClick={() => navigate("/profile")}
+      {loading ? ( // Conditional rendering based on the loading state
+        <Typography variant="body1">Loading...</Typography>
+      ) : (
+        <>
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            spacing={2}
+            justifyContent="center"
           >
-            Retour au Profil
-          </Button>
-        )}
-      </Stack>
-      <Card sx={{ width: { xs: "100%", md: "90%", lg: "80%" }, height: 650 }}>
-        {ad.picture !== null ? (
-          <CardMedia
-            component="img"
-            height="340"
-            image={imagePath}
-            alt="ad picture"
+            <Button
+              type="button"
+              variant="outlined"
+              sx={{ color: "#FDCA40" }}
+              onClick={() => navigate("/annonces")}
+            >
+              Retour aux Annonces
+            </Button>
+            {user.id && (
+              <Button
+                type="button"
+                variant="outlined"
+                sx={{ color: "#FDCA40" }}
+                onClick={() => navigate("/profile")}
+              >
+                Retour au Profil
+              </Button>
+            )}
+          </Stack>
+          <Card
+            sx={{ width: { xs: "100%", md: "90%", lg: "80%" }, height: 650 }}
+          >
+            {ad.picture !== null ? (
+              <CardMedia
+                component="img"
+                height="340"
+                image={imagePath}
+                alt="ad picture"
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                height="140"
+                image={selectImage(ad.title)}
+                alt="ad picture"
+              />
+            )}
+            <CardContent>
+              <Grid container spacing={1}>
+                <Grid item xs={12} md={8}>
+                  <Typography
+                    gutterBottom
+                    variant="h3"
+                    component="div"
+                    color="primary"
+                  >
+                    {ad.title}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    elevation={5}
+                  >
+                    <Typography variant="h6" color="primary">
+                      Prix: {ad.price}€
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <Typography variant="body1" color="primary">
+                    Date de Publication:
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {formattedDate}
+                  </Typography>
+                  <Typography variant="body1" color="primary">
+                    Lieu de la Vente:
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {ad.city}
+                  </Typography>
+                  <Typography variant="body1" color="primary">
+                    Description:
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {ad.description}
+                  </Typography>
+                  <Typography variant="body1" color="primary">
+                    Vendeur: {ad.firstname} {ad.lastname}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    elevation={5}
+                  >
+                    <Button
+                      type="button"
+                      variant="contained"
+                      onClick={() => setShowModal(true)}
+                    >
+                      Contacter le Vendeur
+                    </Button>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+          <ContactSellerModal
+            open={showModal}
+            onClose={() => setShowModal(false)}
+            onSendMessage={handleSendMessage}
+            ad={ad}
           />
-        ) : (
-          <CardMedia
-            component="img"
-            height="140"
-            image={selectImage(ad.title)}
-            alt="ad picture"
-          />
-        )}
-        <CardContent>
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={8}>
-              <Typography
-                gutterBottom
-                variant="h3"
-                component="div"
-                color="primary"
-              >
-                {ad.title}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                elevation={5}
-              >
-                <Typography variant="h6" color="primary">
-                  Prix: {ad.price}€
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <Typography variant="body1" color="primary">
-                Date de Publication:
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {formattedDate}
-              </Typography>
-              <Typography variant="body1" color="primary">
-                Lieu de la Vente:
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {ad.city}
-              </Typography>
-              <Typography variant="body1" color="primary">
-                Description:
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {ad.description}
-              </Typography>
-              <Typography variant="body1" color="primary">
-                Vendeur: {ad.firstname} {ad.lastname}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                elevation={5}
-              >
-                <Button
-                  type="button"
-                  variant="contained"
-                  onClick={() => setShowModal(true)}
-                >
-                  Contacter le Vendeur
-                </Button>
-              </Paper>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
-      <ContactSellerModal
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        onSendMessage={handleSendMessage}
-        ad={ad}
-      />
+        </>
+      )}
     </Container>
   );
 }
