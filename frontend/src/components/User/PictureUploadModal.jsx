@@ -131,15 +131,17 @@ function PictureUploadModal({ adId, open, onClose }) {
               className={dragActive ? "drag-active" : ""}
             >
               <div>
-                <p>Drag and drop your file here or</p>
+                <p>Vous pouvez glisser-déposer votre fichier ou:</p>
                 <button
                   type="button"
                   className="upload-button"
                   onClick={onButtonClick}
                 >
-                  Upload a picture for your Ad & click Send
+                  Cliquer ICI pour chercher un Fichier
                 </button>{" "}
-                {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
+                {selectedFileName && (
+                  <p>Fichier sélectionné: {selectedFileName}</p>
+                )}{" "}
                 {/* Display the selected file name */}
               </div>
               <IconButton
@@ -148,7 +150,7 @@ function PictureUploadModal({ adId, open, onClose }) {
                 sx={{ py: 3, color: "black" }}
               >
                 <FileUploadIcon />
-                Send!
+                Envoyer!
               </IconButton>
             </label>
             {dragActive && (

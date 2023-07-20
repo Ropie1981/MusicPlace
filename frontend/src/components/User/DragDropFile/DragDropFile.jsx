@@ -114,15 +114,15 @@ export default function DragDropFile({ handlePhotoClose }) {
           <CloseIcon color="secondary" />
         </IconButton>
         <div>
-          <p>Drag and drop your file here or</p>
+          <p>Vous pouvez glisser-déposer votre fichier ou:</p>
           <button
             type="button"
             className="upload-button"
             onClick={onButtonClick}
           >
-            Upload a picture for your Profile & click Send
+            Choisir une image de votre Ordinateur
           </button>{" "}
-          {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
+          {selectedFileName && <p>Fichier sélectionné: {selectedFileName}</p>}{" "}
           {/* Display the selected file name */}
         </div>
         <IconButton
@@ -131,7 +131,7 @@ export default function DragDropFile({ handlePhotoClose }) {
           sx={{ py: 3, color: "black" }}
         >
           <FileUploadIcon />
-          Send!
+          Envoyer!
         </IconButton>
       </label>
       {dragActive && (
