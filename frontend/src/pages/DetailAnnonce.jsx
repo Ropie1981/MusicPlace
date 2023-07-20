@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -10,6 +9,9 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { toast } from "react-toastify";
+import ContactSellerModal from "../components/Ad/ContactSellerModal";
+import APIService from "../services/APIService";
 import { useUserContext } from "../Contexts/userContext";
 import keyboard from "../assets/keyboard.jpg";
 import piano from "../assets/piano.jpeg";
@@ -30,14 +32,19 @@ export default function DetailAnnonce() {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const { id } = useParams();
   const [ad, setAd] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const notifyError = () => toast.error("Erreur lors de du chargement");
+  const notifyMail = () => toast("Email Envoyé !");
+  const notifyMailError = () =>
+    toast.error("Problème lors de l'envoi du Message !");
 
   const getAd = () => {
-    axios
-      .get(`${BACKEND_URL}/ads/${id}`)
+    APIService.get(`${BACKEND_URL}/ads/${id}`)
       .then((response) => {
         setAd(response.data);
       })
       .catch((error) => {
+        notifyError();
         console.error(error.message);
       });
   };
@@ -53,6 +60,29 @@ export default function DetailAnnonce() {
   const dateString = `${ad.publish_date}`;
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleDateString("fr-FR", options);
+
+  const handleSendMessage = async (message) => {
+    try {
+      const emailData = {
+        to: "pierre.saumont@gmail.com",
+        subject: `Au sujet de votre Annonce MusicPlace: ${ad.title}`,
+        text: message,
+        html: `<p>${message}</p>`,
+      };
+
+      const response = await APIService.post(
+        `${BACKEND_URL}/sendemail`,
+        emailData
+      );
+
+      console.warn(response.data);
+      notifyMail();
+      setShowModal(false);
+    } catch (error) {
+      console.error(error);
+      notifyMailError();
+    }
+  };
 
   const imagesArray = {
     drum,
@@ -193,7 +223,11 @@ export default function DetailAnnonce() {
                 }}
                 elevation={5}
               >
-                <Button type="button" variant="contained">
+                <Button
+                  type="button"
+                  variant="contained"
+                  onClick={() => setShowModal(true)}
+                >
                   Contacter le Vendeur
                 </Button>
               </Paper>
@@ -201,6 +235,12 @@ export default function DetailAnnonce() {
           </Grid>
         </CardContent>
       </Card>
+      <ContactSellerModal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        onSendMessage={handleSendMessage}
+        ad={ad}
+      />
     </Container>
   );
 }
