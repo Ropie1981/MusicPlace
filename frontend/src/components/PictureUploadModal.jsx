@@ -3,9 +3,10 @@ import Modal from "@mui/material/Modal";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import Typography from "@mui/material/Typography";
-// import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close";
 import "react-toastify/dist/ReactToastify.css";
 import APIService from "../services/APIService";
 import "./DragDropFile/DragDropFile.css";
@@ -101,55 +102,66 @@ function PictureUploadModal({ adId, open, onClose }) {
         <Typography variant="h5" color="text.primary" sx={{ m: 2 }}>
           Voulez-vous ajouter une photo à votre annonce ?
         </Typography>
-        <form
-          id="form-file-upload"
-          onDragEnter={handleDrag}
-          onSubmit={handleSubmit}
-        >
-          <input
-            ref={inputRef}
-            type="file"
-            name="maPhoto"
-            id="input-file-upload"
-            multiple
-            onChange={handleChange}
-          />
-          <label
-            id="label-file-upload"
-            htmlFor="input-file-upload"
-            className={dragActive ? "drag-active" : ""}
+        <Box sx={{ position: "relative" }}>
+          <form
+            id="form-file-upload"
+            onDragEnter={handleDrag}
+            onSubmit={handleSubmit}
           >
-            <div>
-              <p>Drag and drop your file here or</p>
-              <button
-                type="button"
-                className="upload-button"
-                onClick={onButtonClick}
-              >
-                Upload a picture for your Ad & click Send
-              </button>{" "}
-              {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
-              {/* Display the selected file name */}
-              <IconButton
-                aria-label="upload"
-                type="submit"
-                sx={{ py: 3, color: "black" }}
-              >
-                <FileUploadIcon />
-                Send!
-              </IconButton>
-            </div>
-          </label>
-          {dragActive && (
-            <div
-              id="drag-file-element"
-              onDragEnter={handleDrag}
-              onDragLeave={handleDrag}
-              onDragOver={handleDrag}
-              onDrop={handleDrop}
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={onClose}
+              sx={{ position: "absolute", top: 5, right: 5 }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <input
+              ref={inputRef}
+              type="file"
+              name="maPhoto"
+              id="input-file-upload"
+              multiple
+              onChange={handleChange}
             />
-          )}
-        </form>
+            <label
+              id="label-file-upload"
+              htmlFor="input-file-upload"
+              className={dragActive ? "drag-active" : ""}
+            >
+              <div>
+                <p>Drag and drop your file here or</p>
+                <button
+                  type="button"
+                  className="upload-button"
+                  onClick={onButtonClick}
+                >
+                  Upload a picture for your Ad & click Send
+                </button>{" "}
+                {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
+                {/* Display the selected file name */}
+                <IconButton
+                  aria-label="upload"
+                  type="submit"
+                  sx={{ py: 3, color: "black" }}
+                >
+                  <FileUploadIcon />
+                  Send!
+                </IconButton>
+              </div>
+            </label>
+            {dragActive && (
+              <div
+                id="drag-file-element"
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+              />
+            )}
+          </form>
+        </Box>
       </>
     </Modal>
   );
