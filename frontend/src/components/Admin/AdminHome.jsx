@@ -1,7 +1,7 @@
 import React from "react";
 
 function AdminHome() {
-  return <div>AdminHome</div>;
+  return <div>Choisissez l'Entité</div>;
 }
 
 export default AdminHome;
