@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -11,6 +12,7 @@ import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import PersonIcon from "@mui/icons-material/Person";
@@ -57,6 +59,11 @@ export default function Navbar({ toggleColorMode }) {
   };
   const handleLinkPublish = () => {
     navigate("/publish");
+    setAnchorElNavMenu(null);
+  };
+  const handleLinkAdmin = () => {
+    navigate("/admin");
+    setAnchorElUser(null);
     setAnchorElNavMenu(null);
   };
 
@@ -106,8 +113,33 @@ export default function Navbar({ toggleColorMode }) {
               </Typography>
             </MenuItem>
           ) : null}
+          {user.admin === 1 ? (
+            <MenuItem onClick={handleLinkAdmin}>
+              <Typography textAlign="center" variant="h6" sx={{ p: 2 }}>
+                Espace Admin
+              </Typography>
+            </MenuItem>
+          ) : null}
         </Menu>
+
         <Box sx={{ flexGrow: 1 }} />
+        {user.admin === 1 ? (
+          <Button
+            onClick={handleLinkAdmin}
+            sx={{ my: 2, color: "white", display: "block" }}
+          >
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex", alignItems: "center" },
+                pl: 5,
+              }}
+            >
+              <BuildRoundedIcon />
+              <Typography sx={{ ml: 1 }}>Admin</Typography>
+            </Box>
+          </Button>
+        ) : null}
         <IconButton
           size="large"
           aria-label="colorMode"
@@ -150,6 +182,13 @@ export default function Navbar({ toggleColorMode }) {
             <MenuItem onClick={handleLinkProfile}>
               <Typography textAlign="center" variant="h6" sx={{ p: 2 }}>
                 Mon Compte
+              </Typography>
+            </MenuItem>
+          ) : null}
+          {user.admin === 1 ? (
+            <MenuItem onClick={handleLinkAdmin}>
+              <Typography textAlign="center" variant="h6" sx={{ p: 2 }}>
+                Espace Admin
               </Typography>
             </MenuItem>
           ) : null}

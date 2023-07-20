@@ -76,7 +76,7 @@ export default function DragDropFile({ handlePhotoClose }) {
       .post(`${BACKEND_URL}/maPhoto`, formData, { withCredentials: true })
       .then((response) => {
         notifyUpload();
-        login({ ...user, profil_picture: response.data.photoPath });
+        login({ ...user, profil_picture: response.data.imagePath });
         handlePhotoClose();
         setSelectedFileName("");
       })

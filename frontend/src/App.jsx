@@ -10,6 +10,10 @@ import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import PublishAd from "./pages/PublishAd";
 import Navbar from "./components/Navbar";
+import Admin from "./pages/Admin";
+import AdminHome from "./components/Admin/AdminHome";
+import AdminUsers from "./components/Admin/AdminUsers";
+import AdminAds from "./components/Admin/AdminAds";
 import "./App.css";
 
 function App() {
@@ -47,6 +51,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/admin" element={<Admin />}>
+            <Route index element={<AdminHome />} />
+            <Route path="admin-users" element={<AdminUsers />} />
+            <Route path="admin-ads" element={<AdminAds />} />
+          </Route>
           <Route path="/publish" element={<PublishAd />} />
           <Route path="/annonces" element={<Annonces />} />
           <Route path="/annonces/:id" element={<DetailAnnonce />} />
