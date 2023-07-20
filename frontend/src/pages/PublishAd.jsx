@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PictureUploadModal from "../components/PictureUploadModal";
+import PictureUploadModal from "../components/User/PictureUploadModal";
 import APIService from "../services/APIService";
 import { useUserContext } from "../Contexts/userContext";
 
