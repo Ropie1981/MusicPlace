@@ -90,10 +90,15 @@ function PictureUploadModal({ adId, open, onClose }) {
     <Modal
       open={open}
       onClose={onClose}
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <>
-        <Typography variant="body1" color="initial">
+        <Typography variant="h5" color="text.primary" sx={{ m: 2 }}>
           Voulez-vous ajouter une photo à votre annonce ?
         </Typography>
         <form
@@ -153,7 +158,11 @@ function PictureUploadModal({ adId, open, onClose }) {
 export default PictureUploadModal;
 
 PictureUploadModal.propTypes = {
-  adId: PropTypes.number.isRequired,
+  adId: PropTypes.number,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+};
+
+PictureUploadModal.defaultProps = {
+  adId: PropTypes.number,
 };

@@ -68,6 +68,10 @@ export default function Register() {
     }
   };
 
+  const handleLinkLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
@@ -193,9 +197,9 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Button variant="text" onClick={handleLinkLogin}>
                   Vous avez déja un compte? Accéder au Login
-                </Link>
+                </Button>
               </Grid>
             </Grid>
           </Box>
