@@ -124,15 +124,15 @@ export default function DragDropFile({ handlePhotoClose }) {
           </button>{" "}
           {selectedFileName && <p>Selected file: {selectedFileName}</p>}{" "}
           {/* Display the selected file name */}
-          <IconButton
-            aria-label="upload"
-            type="submit"
-            sx={{ py: 3, color: "black" }}
-          >
-            <FileUploadIcon />
-            Send!
-          </IconButton>
         </div>
+        <IconButton
+          aria-label="upload"
+          type="submit"
+          sx={{ py: 3, color: "black" }}
+        >
+          <FileUploadIcon />
+          Send!
+        </IconButton>
       </label>
       {dragActive && (
         <div
