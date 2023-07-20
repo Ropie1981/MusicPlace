@@ -8,8 +8,8 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import "react-toastify/dist/ReactToastify.css";
-import APIService from "../services/APIService";
-import "./DragDropFile/DragDropFile.css";
+import APIService from "../../services/APIService";
+import "../DragDropFile/DragDropFile.css";
 
 function PictureUploadModal({ adId, open, onClose }) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

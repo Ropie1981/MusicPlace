@@ -7,8 +7,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { toast } from "react-toastify";
 import { useUserContext } from "../Contexts/userContext";
-import UserInfos from "../components/UserInfos";
-import MyAds from "../components/MyAds";
+import UserInfos from "../components/User/UserInfos";
+import MyAds from "../components/User/MyAds";
 import APIService from "../services/APIService";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 
