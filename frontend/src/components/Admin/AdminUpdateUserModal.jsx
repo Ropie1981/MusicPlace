@@ -10,8 +10,8 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { toast } from "react-toastify";
-// import Container from "@mui/material/Container";
 import APIService from "../../services/APIService";
 
 function AdminUpdateUserModal({ user, open, onClose }) {
@@ -81,6 +81,9 @@ function AdminUpdateUserModal({ user, open, onClose }) {
           >
             <CloseIcon />
           </IconButton>
+          <Typography variant="h6" color="text.primary">
+            Mettre à Jour l'Utilisateur
+          </Typography>
           <Box
             component="form"
             noValidate
@@ -91,16 +94,25 @@ function AdminUpdateUserModal({ user, open, onClose }) {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
-                    <Switch
-                      checked={formData.admin === 1}
-                      onChange={(event) =>
-                        setFormData({
-                          ...formData,
-                          admin: event.target.checked ? 1 : 0,
-                        })
-                      }
-                      name="admin"
-                    />
+                    <>
+                      <Typography
+                        variant="body1"
+                        color="text.primary"
+                        sx={{ ml: 2 }}
+                      >
+                        Role:
+                      </Typography>
+                      <Switch
+                        checked={formData.admin === 1}
+                        onChange={(event) =>
+                          setFormData({
+                            ...formData,
+                            admin: event.target.checked ? 1 : 0,
+                          })
+                        }
+                        name="admin"
+                      />
+                    </>
                   }
                   label="Admin"
                 />

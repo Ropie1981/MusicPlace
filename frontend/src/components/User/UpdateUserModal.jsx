@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -57,87 +59,98 @@ function UpdateUserModal({ open, onClose }) {
       onClose={onClose}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <Paper elevation={4} sx={{ p: 2 }}>
-        <Box
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 3, mb: 2 }}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstname"
-                required
-                fullWidth
-                id="firstName"
-                label="Prénom"
-                autoFocus
-                onChange={handleInputChange}
-                value={formData.firstname}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastname"
-                label="Nom"
-                name="lastname"
-                autoComplete="family-name"
-                onChange={handleInputChange}
-                value={formData.lastname}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="city"
-                label="Votre Ville"
-                name="city"
-                autoComplete="city"
-                onChange={handleInputChange}
-                value={formData.city}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="phone"
-                label="Votre Numéro de Téléphone"
-                name="phone"
-                autoComplete="phone"
-                onChange={handleInputChange}
-                value={formData.phone}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="Adresse Mail"
-                name="email"
-                autoComplete="email"
-                onChange={handleInputChange}
-                value={formData.email}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            color="success"
-            variant="contained"
+      <Box sx={{ position: "relative" }}>
+        <Paper elevation={4} sx={{ p: 2 }}>
+          <IconButton
+            aria-label="close"
+            color="inherit"
+            size="small"
+            onClick={onClose}
+            sx={{ position: "absolute", top: 5, right: 5 }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
           >
-            Enregistrer
-          </Button>
-        </Box>
-      </Paper>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstname"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Prénom"
+                  autoFocus
+                  onChange={handleInputChange}
+                  value={formData.firstname}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastname"
+                  label="Nom"
+                  name="lastname"
+                  autoComplete="family-name"
+                  onChange={handleInputChange}
+                  value={formData.lastname}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="city"
+                  label="Votre Ville"
+                  name="city"
+                  autoComplete="city"
+                  onChange={handleInputChange}
+                  value={formData.city}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phone"
+                  label="Votre Numéro de Téléphone"
+                  name="phone"
+                  autoComplete="phone"
+                  onChange={handleInputChange}
+                  value={formData.phone}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Adresse Mail"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleInputChange}
+                  value={formData.email}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              color="success"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Enregistrer
+            </Button>
+          </Box>
+        </Paper>
+      </Box>
     </Modal>
   );
 }

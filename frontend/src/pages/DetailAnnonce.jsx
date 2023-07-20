@@ -167,7 +167,7 @@ export default function DetailAnnonce() {
             ) : (
               <CardMedia
                 component="img"
-                height="140"
+                height="340"
                 image={selectImage(ad.title)}
                 alt="ad picture"
               />
