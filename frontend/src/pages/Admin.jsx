@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AdminNav from "../components/Admin/AdminNav";
 import { useUserContext } from "../Contexts/userContext";
+import "animate.css";
 
 function Admin() {
   const { user } = useUserContext();
@@ -18,7 +19,12 @@ function Admin() {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2, textAlign: "center" }}>
-      <Typography variant="h4" color="text.main" sx={{ py: 2 }}>
+      <Typography
+        className="animate__animated animate__fadeInDown"
+        variant="h4"
+        color="text.main"
+        sx={{ py: 2 }}
+      >
         Page Administrateur
       </Typography>
       <Box fullwidth>

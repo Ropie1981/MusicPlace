@@ -13,6 +13,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EditIcon from "@mui/icons-material/Edit";
 import DragDropFiles from "./DragDropFile/DragDropFile";
 import UpdateUserModal from "./UpdateUserModal";
+import "animate.css";
 
 export default function UserInfos({ user }) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -32,7 +33,10 @@ export default function UserInfos({ user }) {
   };
 
   return (
-    <Card sx={{ maxWidth: "100%", mb: { xs: 3, md: 3 } }}>
+    <Card
+      sx={{ maxWidth: "100%", mb: { xs: 3, md: 3 } }}
+      className="animate__animated animate__fadeInDown"
+    >
       <Box
         sx={{
           p: 2,

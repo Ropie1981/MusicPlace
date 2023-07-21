@@ -14,6 +14,7 @@ import Modal from "@mui/material/Modal";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import ReactQuill from "react-quill";
+import snare from "../../assets/snareVarus.webp";
 import "react-quill/dist/quill.snow.css";
 
 import { useUserContext } from "../../Contexts/userContext";
@@ -118,14 +119,25 @@ export default function MyAds() {
                         flexDirection: "column",
                       }}
                     >
-                      <CardMedia
-                        component="div"
-                        sx={{
-                          // 16:9
-                          pt: "56.25%",
-                        }}
-                        image={`${BACKEND_URL}/picture/${ad.picture}`}
-                      />
+                      {ad.picture !== null ? (
+                        <CardMedia
+                          component="div"
+                          sx={{
+                            // 16:9
+                            pt: "56.25%",
+                          }}
+                          image={`${BACKEND_URL}/picture/${ad.picture}`}
+                        />
+                      ) : (
+                        <CardMedia
+                          component="div"
+                          sx={{
+                            // 16:9
+                            pt: "56.25%",
+                          }}
+                          image={snare}
+                        />
+                      )}
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
                           {ad.title}
@@ -194,10 +206,10 @@ export default function MyAds() {
                   component="h2"
                   gutterBottom
                 >
-                  Confirm Deletion
+                  Confirmer la Suppression
                 </Typography>
                 <Typography id="confirmation-modal-description" sx={{ mb: 2 }}>
-                  Are you sure you want to delete this ad?
+                  Êtes-vous sûr ?
                 </Typography>
                 <Button
                   onClick={handleDeleteConfirmed}
@@ -205,10 +217,10 @@ export default function MyAds() {
                   color="error"
                   sx={{ mr: 2 }}
                 >
-                  Confirm
+                  Confirmer
                 </Button>
                 <Button onClick={handleConfirmationClose} variant="outlined">
-                  Cancel
+                  Annuler
                 </Button>
               </Box>
             </Modal>

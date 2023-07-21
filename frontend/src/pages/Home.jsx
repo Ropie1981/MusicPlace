@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
 import MusicGear from "../assets/musicGear.jpg";
 import { useUserContext } from "../Contexts/userContext";
+import Footer from "../components/Footer";
 import "animate.css";
 
 export default function Home() {
@@ -117,16 +118,22 @@ export default function Home() {
         >
           Bienvenue sur notre site de vente d'instruments et de matériel de
           production musicale d'occasion ! <br />
+          <br />
           Que vous soyez musicien professionnel, amateur passionné ou simplement
           à la recherche d'équipements de qualité à des prix abordables, vous
           êtes au bon endroit.
+          <br />
           <br /> Nous nous engageons à offrir une vaste sélection d'instruments
           de musique et d'équipements de production musicale d'occasion,
           provenant de différentes marques renommées. <br />
+          <br />
           Que vous cherchiez une guitare, une batterie, un clavier, une table de
           mixage ou tout autre équipement, vous trouverez certainement votre
           bonheur parmi notre inventaire diversifié.
         </Typography>
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Footer />
       </Box>
     </Container>
   );

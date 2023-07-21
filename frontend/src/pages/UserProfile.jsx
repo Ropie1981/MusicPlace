@@ -11,6 +11,8 @@ import UserInfos from "../components/User/UserInfos";
 import MyAds from "../components/User/MyAds";
 import APIService from "../services/APIService";
 import MusicPlaceL from "../assets/MusicPlaceL.jpg";
+import Footer from "../components/Footer";
+import "animate.css";
 
 export default function UserProfile() {
   const { user } = useUserContext();
@@ -55,7 +57,12 @@ export default function UserProfile() {
         <>
           <UserInfos user={loggedUser} />
           <Grid container spacing={2}>
-            <Grid item xs={12} md={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              className="animate__animated animate__fadeInUp"
+            >
               <Box
                 sx={{
                   borderRadius: 3,
@@ -86,12 +93,20 @@ export default function UserProfile() {
                 Publier une Annonce
               </Button>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid
+              item
+              xs={12}
+              md={8}
+              className="animate__animated animate__fadeInUp"
+            >
               <MyAds user={loggedUser} />
             </Grid>
           </Grid>
         </>
       )}
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Footer />
+      </Box>
     </Container>
   );
 }

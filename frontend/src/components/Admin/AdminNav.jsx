@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import "animate.css";
 
 function AdminNav() {
   const navigate = useNavigate();
@@ -23,9 +24,11 @@ function AdminNav() {
       sx={{ p: 3 }}
     >
       <Button
+        className="animate__animated animate__lightSpeedInLeft"
         size="large"
         variant="text"
         sx={{
+          fontSize: 20,
           width: 250,
           color: "#FDCA40",
           borderColor: "#FDCA40",
@@ -38,9 +41,11 @@ function AdminNav() {
         Utilisateurs
       </Button>
       <Button
+        className="animate__animated animate__lightSpeedInRight"
         size="large"
         variant="text"
         sx={{
+          fontSize: 20,
           width: 250,
           color: "primary.light",
           borderColor: "primary.light",

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 // import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import AdCard from "../components/Ad/AdCard";
 import Categories from "../components/Ad/Categories";
 import APIService from "../services/APIService";
+import Footer from "../components/Footer";
 import "animate.css";
 
 function Annonces() {
@@ -60,6 +62,9 @@ function Annonces() {
           ))}
         </Grid>
       </Container>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Footer />
+      </Box>
     </Container>
   );
 }

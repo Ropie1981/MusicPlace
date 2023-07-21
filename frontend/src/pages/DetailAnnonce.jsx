@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,6 +14,7 @@ import { toast } from "react-toastify";
 import ContactSellerModal from "../components/Ad/ContactSellerModal";
 import APIService from "../services/APIService";
 import { useUserContext } from "../Contexts/userContext";
+import Footer from "../components/Footer";
 import keyboard from "../assets/keyboard.jpg";
 import piano from "../assets/piano.jpeg";
 import guitar1 from "../assets/gretsch.jpeg";
@@ -258,6 +260,9 @@ export default function DetailAnnonce() {
           />
         </>
       )}
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Footer />
+      </Box>
     </Container>
   );
 }

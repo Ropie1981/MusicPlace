@@ -24,11 +24,13 @@ export default function Categories() {
       alignItems={{ xs: "center" }}
     >
       <Autocomplete
+        disabled
         disablePortal
         id="combo-box-demo"
         options={categories}
         renderInput={(params) => (
           <TextField
+            disabled
             sx={{ width: 300 }}
             label="Catégories"
             inputProps={params.inputProps}
@@ -36,7 +38,12 @@ export default function Categories() {
           />
         )}
       />
-      <TextField id="recherche" label={<SearchIcon />} sx={{ width: 300 }} />
+      <TextField
+        disabled
+        id="recherche"
+        label={<SearchIcon />}
+        sx={{ width: 300 }}
+      />
     </Stack>
   );
 }
